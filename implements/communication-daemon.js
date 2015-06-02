@@ -3,7 +3,7 @@
 var net = require('net'),
     Stub = require('../interface/commdaemonStub'),
     ProtoBuf = require('protobufjs'),
-    Cache = require('../../../framework/utils').Cache,
+    Cache = require('utils').Cache(),
     builder = ProtoBuf.loadProtoFile(__dirname + '/packet.proto'),
     Packet = builder.build('WebDE').Packet.PacketModel;
 
