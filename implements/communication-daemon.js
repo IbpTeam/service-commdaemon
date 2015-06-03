@@ -194,6 +194,8 @@ PeerEnd.prototype._callHandler = function(content) {
   if(content.func == 'on') {
     if(typeof self._notifyCB[content.srcAddr] === 'undefined')
       self._notifyCB[content.srcAddr] = {};
+    if(typeof self._notifyCB[content.srcAddr][content.svr] !== 'undefined')
+      return ;
     self._notifyCB[content.srcAddr][content.svr] = function() {
       self.send(content.srcAddr, {
         action: 2,
