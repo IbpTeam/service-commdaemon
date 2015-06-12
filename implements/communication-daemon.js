@@ -295,8 +295,6 @@ PeerEnd.prototype._contentVarify = function(content) {
 PeerEnd.prototype.send = function(dstAddr, content, callback) {
   console.log('Send has been called.');
   var cb = callback || function() {};
-  if(net.isIP(dstAddr) == 0)
-    return cb('Invalid IP address');
   var ret;
   if((ret = this._contentVarify(content)) != null) {
     return cb(ret);
@@ -305,7 +303,13 @@ PeerEnd.prototype.send = function(dstAddr, content, callback) {
     // TODO: generate a token
     content.token = this._token++;
     this._callStack[content.token] = cb;
+  } else if(content.action == 2 && dstAddr == 'local') {
+    // intent to local processes
+    this._notifyHandler(content);
+    return cb(null, 0);
   }
+  if(net.isIP(dstAddr) == 0)
+    return cb('Invalid IP address');
   var conn = this._getConnection(dstAddr);
   conn.write(this._packet(content), function() {
     // TODO: do sth after sending packet
