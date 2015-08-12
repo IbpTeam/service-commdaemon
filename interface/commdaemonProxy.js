@@ -56,7 +56,7 @@ Proxy.prototype.send = function(String, Object, callback) {
   });
 };
 
-Proxy.prototype.register = function(String, String, callback) {
+Proxy.prototype.register = function(Array, callback) {
   var l = arguments.length,
       args = Array.prototype.slice.call(arguments, 0, (typeof callback === 'undefined' ? l : l - 1));
   this.ipc.invoke({

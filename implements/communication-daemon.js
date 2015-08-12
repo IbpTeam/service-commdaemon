@@ -322,14 +322,17 @@ PeerEnd.prototype.send = function(dstAddr, content, callback) {
 }
 
 // API for clients to register services
-PeerEnd.prototype.register = function(svrName, svrAddr, callback) {
-  var cb = callback || function() {};
-  if(typeof this._svrList[svrName] !== 'undefined')
-    return cb('Service has been registered.');
-  // TODO: varify this svrAddr
-  this._svrList[svrName] = svrAddr;
-  console.log(svrName, 'registered OK!');
-  cb(null);
+PeerEnd.prototype.register = function(svcList, callback) {
+  var cb = callback || function() {},
+      ret = [];
+  for(var key in svcList) {
+    if(typeof this._svrList[key] !== 'undefined')
+      return ret.push(key);
+    // TODO: varify this svrAddr
+    this._svrList[key] = svcList[key];
+    console.log(key, 'registered OK!');
+  }
+  cb((ret.length > 0 ? ('Service ' + ret.join(',') + ' has been registered.') : null));
 }
 
 // API for clients to unregister services
