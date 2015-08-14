@@ -28,8 +28,7 @@ var initObj = {
     {
       "name": "register",
       "in": [
-        "String",
-        "String"
+        "Array"
       ],
       "out": "Object"
     },
@@ -51,12 +50,14 @@ var initObj = {
         }
       });
     },
-    register: function(svrName, svrAddr, callback) {
-      peer.register(svrName, svrAddr, function(err) {
+    // TODO: change argument0 & argument1 to an k-v array
+    register: function(svrList, callback) {
+      peer.register(svrList, function(err) {
         if(err) callback({err: err});
         else callback({});
       });
     },
+    // TODO: change argument0 to an array
     unregister: function(svrName, callback) {
       peer.unregister(svrName, function(err) {
         if(err) callback({err: err});
