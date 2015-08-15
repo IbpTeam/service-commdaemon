@@ -6,7 +6,7 @@
   "repository": {
     "url": ""
   },
-  "main": "implements/communication-daemon.js",
+  "main": "index.js",
   "dependencies": {
     "protobufjs": "~4.0.0",
     "webde-rpc": "~0.1.0",
