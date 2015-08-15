@@ -1,7 +1,7 @@
 // TODO: implements the server for reciving RPC requests from clients
 //   and register/unregister requests from services
 var net = require('net'),
-    Stub = require('../interface/commdaemonStub'),
+    Stub = require('../interface/stub'),
     ProtoBuf = require('protobufjs'),
     Cache = require('utils').Cache(),
     builder = ProtoBuf.loadProtoFile(__dirname + '/packet.proto'),
@@ -325,6 +325,7 @@ PeerEnd.prototype.send = function(dstAddr, content, callback) {
 PeerEnd.prototype.register = function(svcList, callback) {
   var cb = callback || function() {},
       ret = [];
+  console.log('register:', arguments);
   for(var key in svcList) {
     if(typeof this._svrList[key] !== 'undefined')
       return ret.push(key);
