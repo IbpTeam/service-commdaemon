@@ -18,7 +18,7 @@ var initObj = {
   "service": false
 }
 
-function Proxy(callback) {
+function Proxy() {
   // TODO: please replace $IPC with the real path of ipc module in your project
   this.ipc = require('webde-rpc').getIPC(initObj);
   this._token = 0;
@@ -43,10 +43,6 @@ function Proxy(callback) {
   this.ipc.onError = function(err) {
     // TODO: your handler
   }*/
-
-  process.nextTick(function() {
-    callback(null);
-  });
 }
 
 Proxy.prototype.send = function(String, Object, callback) {
@@ -91,19 +87,9 @@ Proxy.prototype.off = function(event, handler) {
 };
 
 var proxy = null;
-exports.getProxy = function(ip, callback) {
-  var cb = callback || function() {};
+exports.getProxy = function(ip) {
   if(proxy == null) {
-    proxy = new Proxy(function(err) {
-      if(err) cb(err);
-      process.nextTick(function() {
-        cb(null, proxy);
-      });
-    });
-  } else {
-    process.nextTick(function() {
-      cb(null, proxy);
-    });
+    proxy = new Proxy();
   }
   return proxy;
 };

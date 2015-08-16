@@ -28,7 +28,7 @@ var initObj = {
     {
       "name": "register",
       "in": [
-        "Array"
+        "Object"
       ],
       "out": "Object"
     },

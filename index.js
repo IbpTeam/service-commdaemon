@@ -17,7 +17,7 @@ if(process.argv[2] == 'start') {
   });
 } else {
   var svcmgr = require('webde-rpc').defaultSvcMgr();
-  svcmgr.addService('commdaemon', {
+  svcmgr.addService('nodejs.webde.commdaemon', {
     path: __dirname,
     args: ['start'],
     remote: false

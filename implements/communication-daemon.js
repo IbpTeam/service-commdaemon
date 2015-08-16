@@ -176,6 +176,7 @@ PeerEnd.prototype._callHandler = function(content) {
   } catch(e) {
     try {
       // console.log(self._svrList, content.svr, self._svrList[content.svr]);
+      console.log('path:', self._svrList[content.svr], typeof self._svrList[content.svr]);
       svrProxy = require(self._svrList[content.svr]).getProxy();
       self._svrObj.set(content.svr, svrProxy);
     } catch(e) {
@@ -325,14 +326,16 @@ PeerEnd.prototype.send = function(dstAddr, content, callback) {
 PeerEnd.prototype.register = function(svcList, callback) {
   var cb = callback || function() {},
       ret = [];
-  console.log('register:', arguments);
   for(var key in svcList) {
-    if(typeof this._svrList[key] !== 'undefined')
-      return ret.push(key);
+    if(typeof this._svrList[key] !== 'undefined') {
+      ret.push(key);
+      continue;
+    }
     // TODO: varify this svrAddr
     this._svrList[key] = svcList[key];
     console.log(key, 'registered OK!');
   }
+  console.log('register:', this._svrList);
   cb((ret.length > 0 ? ('Service ' + ret.join(',') + ' has been registered.') : null));
 }
 
