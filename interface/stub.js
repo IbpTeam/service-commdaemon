@@ -52,7 +52,6 @@ var initObj = {
     },
     // TODO: change argument0 & argument1 to an k-v array
     register: function(svrList, callback) {
-      console.log('stub register:', arguments);
       peer.register(svrList, function(err) {
         if(err) callback({err: err});
         else callback({});

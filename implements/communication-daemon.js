@@ -335,7 +335,6 @@ PeerEnd.prototype.register = function(svcList, callback) {
     this._svrList[key] = svcList[key];
     console.log(key, 'registered OK!');
   }
-  console.log('register:', this._svrList);
   cb((ret.length > 0 ? ('Service ' + ret.join(',') + ' has been registered.') : null));
 }
 
