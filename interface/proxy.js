@@ -56,7 +56,7 @@ Proxy.prototype.send = function(String, Object, callback) {
   });
 };
 
-Proxy.prototype.register = function(Array, callback) {
+Proxy.prototype.register = function(SvcList, callback) {
   var l = arguments.length,
       args = Array.prototype.slice.call(arguments, 0, (typeof callback === 'undefined' ? l : l - 1));
   this.ipc.invoke({
@@ -87,7 +87,7 @@ Proxy.prototype.off = function(event, handler) {
 };
 
 var proxy = null;
-exports.getProxy = function() {
+exports.getProxy = function(ip) {
   if(proxy == null) {
     proxy = new Proxy();
   }

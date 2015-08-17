@@ -8,7 +8,7 @@
     },
     {
       "name": "register",
-      "in": ["Array"],
+      "in": ["Object"],
       "out": "Number"
     },
     {
